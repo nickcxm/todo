@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nickc.todo.mapper.GroupMapper">
+    <resultMap id="BaseResultMap" type="com.nickc.todo.pojo.Group">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="groupName" property="groupname" jdbcType="VARCHAR"/>
+        <result column="user" property="user" jdbcType="INTEGER"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `group`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.nickc.todo.pojo.Group">
+    insert into `group` ( groupName, user)
+    values (#{groupname,jdbcType=VARCHAR}, #{user,jdbcType=INTEGER})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.nickc.todo.pojo.Group">
+    update `group`
+    set groupName = #{groupname,jdbcType=VARCHAR},
+      user = #{user,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, groupName, user
+    from `group`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, groupName, user
+    from `group` where user=#{user}
+  </select>
+</mapper>
