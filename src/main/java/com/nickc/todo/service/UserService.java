@@ -5,6 +5,8 @@ import com.nickc.todo.pojo.user.User;
 import com.nickc.todo.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.MessageDigest;
 
@@ -43,15 +45,15 @@ public class UserService {
      * 登陆
      *
      * @param userName
-     * @param pass
+     * @param
      * @return
      */
-    public boolean login(String userName, String pass) {
+    public boolean login(String userName, String passWord) {
         User user = userMapper.getUserByUserName(userName);
         if (user == null) {
             return false;
         }
-        return PasswordUtil.verify(pass, user.getSalt(), user.getPassWord());
+        return PasswordUtil.verify(passWord, user.getSalt(), user.getPassWord());
     }
 
 }

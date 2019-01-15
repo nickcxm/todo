@@ -1,7 +1,10 @@
 package com.nickc.todo.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class Mission implements Serializable {
     private Integer id;
 
@@ -13,57 +16,10 @@ public class Mission implements Serializable {
 
     private Boolean important;
 
-    private Integer status;
+    private String status;
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Integer getGroupid() {
-        return groupid;
-    }
-
-    public void setGroupid(Integer groupid) {
-        this.groupid = groupid;
-    }
-
-    public Integer getUser() {
-        return user;
-    }
-
-    public void setUser(Integer user) {
-        this.user = user;
-    }
-
-    public Boolean getImportant() {
-        return important;
-    }
-
-    public void setImportant(Boolean important) {
-        this.important = important;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 
     @Override
     public String toString() {

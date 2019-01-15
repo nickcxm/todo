@@ -26,8 +26,15 @@ public class GroupController {
         return group;
     }
 
-    @PostMapping("/get")
-    public List<Group> getAll(@RequestParam int user){
+    @GetMapping("/get")
+    public List<Group> getAll(@RequestParam Integer user){
         return groupService.getAllGroup(user);
     }
+
+    @GetMapping("/delete")
+    public boolean delete(@RequestParam Integer id){
+        groupService.deleteGroupById(id);
+        return true;
+    }
+
 }

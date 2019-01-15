@@ -4,6 +4,8 @@ import com.nickc.todo.mapper.MissionMapper;
 import com.nickc.todo.pojo.Group;
 import com.nickc.todo.pojo.Mission;
 import com.nickc.todo.pojo.user.User;
+import com.nickc.todo.vo.MissionChangeParam;
+import com.nickc.todo.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +28,30 @@ public class MissionController {
         return missionMapper.selectAll(map);
     }
 
-//    public Mission insert(@RequestBody Mission mission){
-//
-//    }
+    @PostMapping("/add")
+    public Result insert(@RequestBody Mission mission){
+        int a =missionMapper.insert(mission);
+        System.out.println(a);
+        System.out.println(mission.toString());
+        return new Result(200,"添加成功",mission);
+    }
+
+    @PostMapping("/change")
+    public boolean change(@RequestBody Mission mission){
+        missionMapper.updateByPrimaryKey(mission);
+        return true;
+    }
+
+    @GetMapping("/delete")
+    public boolean delete(@RequestParam Integer id){
+        missionMapper.deleteByPrimaryKey(id);
+        return true;
+    }
+
+    @GetMapping("/getImportant")
+    public Result getImp(@RequestParam Integer uid){
+        return new Result(200,"获取成功",missionMapper.getImportant(uid));
+    }
+
+
 }

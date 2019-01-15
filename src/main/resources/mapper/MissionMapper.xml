@@ -7,18 +7,22 @@
     <result column="groupid" property="groupid" jdbcType="INTEGER" />
     <result column="user" property="user" jdbcType="INTEGER" />
     <result column="important" property="important" jdbcType="BIT" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mission
     where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByGroup" parameterType="java.lang.Integer" >
+    delete from mission
+    where groupid = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.nickc.todo.pojo.Mission" >
     insert into mission ( text, groupid,
       user, important, status
       )
     values ( #{text,jdbcType=VARCHAR}, #{groupid,jdbcType=INTEGER},
-      #{user,jdbcType=INTEGER}, #{important,jdbcType=BIT}, #{status,jdbcType=INTEGER}
+      #{user,jdbcType=INTEGER}, #{important,jdbcType=BIT}, #{status,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.nickc.todo.pojo.Mission" >
@@ -27,7 +31,7 @@
       groupid = #{groupid,jdbcType=INTEGER},
       user = #{user,jdbcType=INTEGER},
       important = #{important,jdbcType=BIT},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -38,5 +42,11 @@
   <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap" >
     select id, text, groupid, user, important, status
     from mission where groupid=#{groupId,jdbcType=INTEGER} and user=#{user,jdbcType=INTEGER}
+  </select>
+
+  <select id="getImportant" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, text, groupid, user, important, status
+    from mission
+    where user = #{uid,jdbcType=INTEGER} and important=true
   </select>
 </mapper>

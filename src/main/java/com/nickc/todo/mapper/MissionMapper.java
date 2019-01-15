@@ -13,4 +13,9 @@ public interface MissionMapper {
     List<Mission> selectAll(Map<String,Object> map);
 
     int updateByPrimaryKey(Mission record);
+
+    int deleteByGroup(Integer id);
+
+    List<Mission> getImportant(Integer uid);
+
 }
